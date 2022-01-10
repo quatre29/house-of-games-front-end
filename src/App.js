@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from "react";
+import { Paper, Box, Typography, Button } from "@mui/material";
+import { ColorModeContext } from "./styles/Theme";
+import useStyles from "./styles/app.styles";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import NavBar from "./components/NavBar";
 
 function App() {
+  const { mode, toggleColorMode } = useContext(ColorModeContext);
+  const classes = useStyles();
+
+  console.log(classes);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <NavBar />
+      <Box>
+        <Paper>
+          <Typography className={classes.text} variant="h1">
+            This is some text
+          </Typography>
+        </Paper>
+      </Box>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
     </div>
   );
 }
