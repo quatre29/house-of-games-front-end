@@ -1,5 +1,6 @@
 import { makeStyles } from "@mui/styles";
 import { alpha } from "@mui/material/styles";
+import { blueGrey } from "@mui/material/colors";
 
 const useStyles = makeStyles((theme) => ({
   searchContainer: {
@@ -41,6 +42,16 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  avatarMenuContainer: {
+    border: "4px solid transparent",
+    borderRadius: "50%",
+    padding: "1px",
+    "&:hover": {
+      border: `4px solid ${blueGrey[50]}`,
+      cursor: "pointer",
+    },
+  },
+  navItem: {},
 }));
 
 export default useStyles;

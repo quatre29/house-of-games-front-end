@@ -17,6 +17,7 @@ import {
 } from "@mui/icons-material";
 import { ColorModeContext } from "../styles/Theme";
 import useStyles from "../styles/components/nav-bar.styles";
+import AvatarDropMenu from "./AvatarDropMenu";
 
 const NavBar = () => {
   const { mode, toggleColorMode } = useContext(ColorModeContext);
@@ -35,35 +36,48 @@ const NavBar = () => {
 
   return (
     <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h5">This is the title</Typography>
-        <Box sx={{ flexGrow: 1 }} />
+      <Container maxWidth="lg">
+        <Toolbar>
+          <Typography variant="h5">House of Games</Typography>
+          <Box sx={{ flexGrow: 1 }} />
 
-        <Box className={classes.searchContainer}>
-          <Box className={classes.searchIconWrapper}>
-            <SearchIcon />
+          <Box className={classes.searchContainer}>
+            <Box className={classes.searchIconWrapper}>
+              <SearchIcon />
+            </Box>
+            <InputBase
+              className={classes.inputBase}
+              placeholder="Search…"
+              inputProps={{ "aria-label": "search" }}
+            />
           </Box>
-          <InputBase
-            className={classes.inputBase}
-            placeholder="Search…"
-            inputProps={{ "aria-label": "search" }}
-          />
-        </Box>
 
-        <Box sx={{ flexGrow: 1 }} />
-        {darkModeButton}
+          <Box sx={{ flexGrow: 1 }} />
+          {darkModeButton}
 
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-      </Toolbar>
+          <IconButton
+            size="large"
+            aria-label="show 4 new mails"
+            color="inherit"
+          >
+            <Badge badgeContent={4} color="error">
+              <MailIcon />
+            </Badge>
+          </IconButton>
+          <IconButton
+            size="large"
+            aria-label="show 4 new mails"
+            color="inherit"
+          >
+            <Badge badgeContent={4} color="error">
+              <MailIcon />
+            </Badge>
+          </IconButton>
+          <Box className={classes.navItem}>
+            <AvatarDropMenu />
+          </Box>
+        </Toolbar>
+      </Container>
     </AppBar>
   );
 };
