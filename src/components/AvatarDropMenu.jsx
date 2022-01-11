@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef, useEffect } from "react";
-
+import { Link } from "react-router-dom";
 import {
   Box,
   Container,
@@ -90,8 +90,14 @@ const AvatarDropMenu = () => {
                   aria-labelledby="composition-button"
                   onKeyDown={handleListKeyDown}
                 >
-                  <MenuItem onClick={handleCloseMenu}>Profile</MenuItem>
-                  <MenuItem onClick={handleCloseMenu}>My account</MenuItem>
+                  <MenuItem onClick={handleCloseMenu}>
+                    <Link
+                      state={{ username: user.username }}
+                      to={`/my-profile`}
+                    >
+                      Profile
+                    </Link>
+                  </MenuItem>
                   <MenuItem onClick={logout}>Logout</MenuItem>
                 </MenuList>
               </ClickAwayListener>

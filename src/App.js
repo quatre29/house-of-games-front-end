@@ -7,6 +7,11 @@ import Home from "./pages/Home";
 import NavBar from "./components/NavBar";
 import Login from "./pages/Login";
 import useAuth from "./hooks/useAuth";
+import Footer from "./components/Footer";
+import CategoryList from "./pages/CategoryList";
+import UserPage from "./pages/UserPage";
+import ReviewPage from "./pages/ReviewPage";
+import CreateReview from "./pages/CreateReview";
 
 function App() {
   const { mode, toggleColorMode } = useContext(ColorModeContext);
@@ -15,13 +20,20 @@ function App() {
   const { user } = useAuth();
 
   return (
-    <div>
+    <div className={classes.appContainer}>
       {user ? (
         <>
           <NavBar />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/categories/:category" element={<CategoryList />} />
+            <Route path="/users/:username" element={<UserPage />} />
+            <Route path="/my-profile" element={<UserPage />} />
+            <Route path="/new" element={<CreateReview />} />
+
+            <Route path="/reviews/:review_id" element={<ReviewPage />} />
           </Routes>
+          <Footer />
         </>
       ) : (
         <Login />

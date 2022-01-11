@@ -20,55 +20,67 @@ const ReviewCard = ({ review }) => {
 
   useEffect(() => {
     getUser(review.owner).then((data) => setUserReview(data));
+    return setUserReview(null);
   }, []);
 
-  console.log(review);
-
   return (
-    <Card
-      className={classes.cardContainer}
-      component={Paper}
-      variant="outlined"
-    >
-      <Grid container>
-        <Grid item>
-          <Avatar src={userReview && userReview.avatar_url} />
-        </Grid>
-        <Grid item xs={10}>
-          <Grid container>
-            <Grid item xs={12}>
-              <Typography
-                variant="body2"
-                sx={{ fontWeight: "bold" }}
-                className={classes.username}
-              >
-                {userReview && userReview.name}
-              </Typography>
-            </Grid>
-            <Grid item xs={12} className={classes.date}>
-              <Typography variant="body2">2 days ago</Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <Typography variant="h4">{review.title}</Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <Typography>#{review.category}</Typography>
-            </Grid>
-            <Grid item xs={12} className={classes.socialContainer}>
-              <Grid container>
-                <Grid item xs={3} className={classes.socialItem}>
-                  <FavoriteBorderOutlined />
-                  <Typography>4</Typography>
-                </Grid>
-                <Grid item xs={3} className={classes.socialItem}>
-                  <ChatBubbleOutline />
-                  <Typography>3</Typography>
+    <Card className={classes.cardContainer} variant="outlined">
+      {userReview ? (
+        <Grid container>
+          <Grid item>
+            <Avatar src={userReview.avatar_url} />
+          </Grid>
+          <Grid item xs={10}>
+            <Grid container>
+              <Grid item xs={12}>
+                <Link to={`/users/${userReview.username}`}>
+                  <Typography
+                    variant="body2"
+                    sx={{ fontWeight: "bold" }}
+                    className={classes.username}
+                  >
+                    {userReview.name}
+                  </Typography>
+                </Link>
+              </Grid>
+              <Grid item xs={12} className={classes.date}>
+                <Typography variant="body2">2 days ago</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Link
+                  className={classes.titleLink}
+                  to={`/reviews/${review.review_id}`}
+                >
+                  <Typography
+                    sx={{ fontWeight: "bold" }}
+                    className={classes.title}
+                    variant="h4"
+                  >
+                    {review.title}
+                  </Typography>
+                </Link>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography>#{review.category}</Typography>
+              </Grid>
+              <Grid item xs={12} className={classes.socialContainer}>
+                <Grid container>
+                  <Grid item xs={3} className={classes.socialItem}>
+                    <FavoriteBorderOutlined />
+                    <Typography>4</Typography>
+                  </Grid>
+                  <Grid item xs={3} className={classes.socialItem}>
+                    <ChatBubbleOutline />
+                    <Typography>3</Typography>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      ) : (
+        <p>Loading...</p>
+      )}
       <CardMedia
         component="img"
         sx={{ width: 151, borderRadius: "5px" }}

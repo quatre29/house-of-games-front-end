@@ -8,6 +8,8 @@ import {
   Badge,
   Typography,
   Container,
+  Button,
+  Link,
 } from "@mui/material";
 import {
   DarkMode,
@@ -18,10 +20,12 @@ import {
 import { ColorModeContext } from "../styles/Theme";
 import useStyles from "../styles/components/nav-bar.styles";
 import AvatarDropMenu from "./AvatarDropMenu";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
   const { mode, toggleColorMode } = useContext(ColorModeContext);
   const classes = useStyles();
+  const navigate = useNavigate();
 
   const darkModeButton =
     mode === "light" ? (
@@ -53,26 +57,16 @@ const NavBar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 1 }} />
+          <Box className={classes.navItem}>
+            <Button
+              color="secondary"
+              onClick={() => navigate("/new")}
+              variant="contained"
+            >
+              new review
+            </Button>
+          </Box>
           {darkModeButton}
-
-          <IconButton
-            size="large"
-            aria-label="show 4 new mails"
-            color="inherit"
-          >
-            <Badge badgeContent={4} color="error">
-              <MailIcon />
-            </Badge>
-          </IconButton>
-          <IconButton
-            size="large"
-            aria-label="show 4 new mails"
-            color="inherit"
-          >
-            <Badge badgeContent={4} color="error">
-              <MailIcon />
-            </Badge>
-          </IconButton>
           <Box className={classes.navItem}>
             <AvatarDropMenu />
           </Box>

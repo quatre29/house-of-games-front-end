@@ -19,6 +19,17 @@ const useStyles = makeStyles((theme) => ({
   socialItem: {
     display: "flex",
   },
+  titleLink: {
+    textDecoration: "none",
+    color: "inherit",
+  },
+  title: {
+    fontWeight: "bold",
+    color: blueGrey[900],
+    "&:hover": {
+      color: "#323ebe",
+    },
+  },
 }));
 
 export default useStyles;
