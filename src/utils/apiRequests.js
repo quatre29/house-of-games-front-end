@@ -14,8 +14,11 @@ export const getReview = async (review_id) => {
   return review.data.review;
 };
 
-export const getAllReviews = async (page) => {
-  const reviews = await api.get(`/api/reviews?page=${page}`);
+export const getAllReviews = async (page, sortBy, orderBy) => {
+  const sort = sortBy.length > 0 ? `&sort_by=${sortBy}` : "";
+  const order = orderBy ? `&order=ascending` : "";
+
+  const reviews = await api.get(`/api/reviews?page=${page}${sort}${order}`);
   return {
     reviews: reviews.data.reviews,
     totalCount: reviews.data.total_count,

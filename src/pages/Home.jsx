@@ -13,19 +13,25 @@ const Home = () => {
   const [reviewsCount, setReviewsCount] = useState(0);
   const [categories, setCategories] = useState([]);
   const [page, setPage] = useState(1);
+
+  const [sortBy, setSortBy] = useState("");
+  const [ascending, setAscending] = useState(false);
+  const [toggleFiltering, setToggleFiltering] = useState(false);
+
   const classes = useStyles();
   const navigate = useNavigate();
+  console.log(sortBy, ascending, toggleFiltering);
 
   useEffect(() => {
     getCategories().then((data) => setCategories(data));
   }, []);
 
   useEffect(() => {
-    getAllReviews(page).then((data) => {
+    getAllReviews(page, sortBy, ascending).then((data) => {
       setReviews(data.reviews);
       setReviewsCount(data.totalCount);
     });
-  }, [page]);
+  }, [page, toggleFiltering]);
 
   const goToCategory = (category) => {
     navigate(`/categories/${category.slug}`, { state: { category } });
@@ -38,7 +44,6 @@ const Home = () => {
 
   return (
     <Container maxWidth="md" className={classes.homeContainer}>
-      <FilterReviews />
       <Box>
         {categories.map((category, i) => (
           <Button
@@ -49,6 +54,15 @@ const Home = () => {
           </Button>
         ))}
       </Box>
+      <FilterReviews
+        ascending={ascending}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
+        setAscending={setAscending}
+        setPage={setPage}
+        setToggleFiltering={setToggleFiltering}
+      />
+
       {reviews.map((review, i) => (
         <ReviewCard key={`${review.review_id}${i}`} review={review} />
       ))}
