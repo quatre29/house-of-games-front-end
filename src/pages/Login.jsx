@@ -17,7 +17,7 @@ import {
   Paper,
   Grow,
 } from "@mui/material";
-import { blue } from "@mui/material/colors";
+import { blue, orange, deepOrange, deepPurple } from "@mui/material/colors";
 import { Person as PersonIcon } from "@mui/icons-material";
 import useStyles from "../styles/pages/login-styles";
 
@@ -55,7 +55,9 @@ const Login = () => {
                 sx={{ borderRadius: "5px" }}
               >
                 <ListItemAvatar>
-                  <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
+                  <Avatar
+                    sx={{ bgcolor: deepPurple[100], color: deepPurple[600] }}
+                  >
                     <PersonIcon />
                   </Avatar>
                 </ListItemAvatar>

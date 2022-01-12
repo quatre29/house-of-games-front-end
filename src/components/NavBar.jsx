@@ -21,6 +21,7 @@ import { ColorModeContext } from "../styles/Theme";
 import useStyles from "../styles/components/nav-bar.styles";
 import AvatarDropMenu from "./AvatarDropMenu";
 import { useNavigate } from "react-router-dom";
+import { deepPurple } from "@mui/material/colors";
 
 const NavBar = () => {
   const { mode, toggleColorMode } = useContext(ColorModeContext);
@@ -30,7 +31,7 @@ const NavBar = () => {
   const darkModeButton =
     mode === "light" ? (
       <IconButton onClick={toggleColorMode}>
-        <DarkMode fontSize="large" sx={{ color: "#000" }} />
+        <DarkMode fontSize="large" sx={{ color: deepPurple[50] }} />
       </IconButton>
     ) : (
       <IconButton onClick={toggleColorMode}>

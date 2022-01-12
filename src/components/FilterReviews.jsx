@@ -8,7 +8,19 @@ import {
   Box,
   Switch,
   Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Slide,
+  Typography,
 } from "@mui/material";
+
+import useStyles from "../styles/components/filter-reviews-dialog.styles";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const FilterReviews = ({
   ascending,
@@ -17,7 +29,11 @@ const FilterReviews = ({
   setAscending,
   setPage,
   setToggleFiltering,
+  setOpenFilterDialog,
+  openFilterDialog,
 }) => {
+  const classes = useStyles();
+
   const filterReviews = () => {
     if (!ascending && sortBy.length < 1) return;
 
@@ -26,36 +42,64 @@ const FilterReviews = ({
     // setAscending(false);
     setPage(1);
     setToggleFiltering((prevState) => !prevState);
+    handleClose();
   };
+
+  const handleClose = () => {
+    setOpenFilterDialog(false);
+  };
+
   return (
-    <Container maxWidth="md">
-      <Box>
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Sort by...</InputLabel>
-          <Select
-            value={sortBy}
-            label="Sort By"
-            onChange={(e) => setSortBy(e.target.value)}
-          >
-            <MenuItem value="votes">Votes</MenuItem>
-            <MenuItem value="comments">Comments</MenuItem>
-            <MenuItem value="designer">Designer</MenuItem>
-            <MenuItem value="title">Title</MenuItem>
-            <MenuItem value="owner">Owner</MenuItem>
-            <MenuItem value="date">Date</MenuItem>
-          </Select>
-        </FormControl>
-        <Box>
-          <Switch
-            checked={ascending}
-            onChange={(e) => setAscending(e.target.checked)}
-            inputProps={{ "aria-label": "controlled" }}
-          />
-          Ascending
-        </Box>
-        <Button onClick={filterReviews}>Filter</Button>
-      </Box>
-    </Container>
+    <div>
+      <Dialog
+        maxWidth="lg"
+        open={openFilterDialog}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        PaperProps={{
+          style: {
+            padding: "30px",
+            width: "500px",
+          },
+        }}
+        BackdropProps={{
+          classes: {
+            root: classes.backDrop,
+          },
+        }}
+      >
+        <DialogTitle>Filter Reviews</DialogTitle>
+        <DialogContent>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Sort by...</InputLabel>
+            <Select
+              value={sortBy}
+              label="Sort By"
+              onChange={(e) => setSortBy(e.target.value)}
+            >
+              <MenuItem value="votes">Votes</MenuItem>
+              <MenuItem value="comments">Comments</MenuItem>
+              <MenuItem value="designer">Designer</MenuItem>
+              <MenuItem value="title">Title</MenuItem>
+              <MenuItem value="owner">Owner</MenuItem>
+              <MenuItem value="date">Date</MenuItem>
+            </Select>
+          </FormControl>
+          <Box>
+            <Switch
+              checked={ascending}
+              onChange={(e) => setAscending(e.target.checked)}
+              inputProps={{ "aria-label": "controlled" }}
+            />
+            Ascending
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={filterReviews}>Filter</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
   );
 };
 

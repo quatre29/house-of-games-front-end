@@ -1,5 +1,18 @@
 import React, { createContext, useState, useMemo, useContext } from "react";
 import { createTheme, ThemeProvider } from "@mui/material";
+import {
+  grey,
+  deepOrange,
+  yellow,
+  orange,
+  lime,
+  green,
+  lightGreen,
+  deepPurple,
+  blueGrey,
+  indigo,
+  cyan,
+} from "@mui/material/colors";
 
 export const ColorModeContext = createContext({
   toggleColorMode: () => {},
@@ -24,6 +37,16 @@ export const ColorModeContextProvider = ({ children }) => {
       createTheme({
         palette: {
           mode,
+          primary: {
+            main: mode === "light" ? deepPurple[400] : grey[300],
+            light: mode === "light" ? deepPurple[200] : grey[100],
+            dark: mode === "light" ? deepPurple[600] : grey[600],
+          },
+          secondary: {
+            main: blueGrey[400],
+            light: blueGrey[200],
+            dark: blueGrey[600],
+          },
         },
       }),
     [mode]

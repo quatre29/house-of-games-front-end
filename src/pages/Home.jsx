@@ -3,10 +3,18 @@ import ReviewCard from "../components/ReviewCard";
 
 import useAuth from "../hooks/useAuth";
 import { getAllReviews, getCategories } from "../utils/apiRequests";
-import { Container, Box, Button, Pagination, Stack } from "@mui/material";
+import {
+  Container,
+  Box,
+  Button,
+  Pagination,
+  Stack,
+  Paper,
+} from "@mui/material";
 import useStyles from "../styles/pages/home.styles";
 import FilterReviews from "../components/FilterReviews";
 import { useNavigate } from "react-router-dom";
+import ReviewsList from "../components/ReviewsList";
 
 const Home = () => {
   const [reviews, setReviews] = useState([]);
@@ -17,10 +25,10 @@ const Home = () => {
   const [sortBy, setSortBy] = useState("");
   const [ascending, setAscending] = useState(false);
   const [toggleFiltering, setToggleFiltering] = useState(false);
+  const [openFilterDialog, setOpenFilterDialog] = useState(false);
 
   const classes = useStyles();
   const navigate = useNavigate();
-  console.log(sortBy, ascending, toggleFiltering);
 
   useEffect(() => {
     getCategories().then((data) => setCategories(data));
@@ -37,11 +45,6 @@ const Home = () => {
     navigate(`/categories/${category.slug}`, { state: { category } });
   };
 
-  const handlePagination = (event, value) => {
-    console.log(value);
-    setPage(value);
-  };
-
   return (
     <Container maxWidth="md" className={classes.homeContainer}>
       <Box>
@@ -54,6 +57,9 @@ const Home = () => {
           </Button>
         ))}
       </Box>
+      <Button variant="contained" onClick={() => setOpenFilterDialog(true)}>
+        Filter options
+      </Button>
       <FilterReviews
         ascending={ascending}
         sortBy={sortBy}
@@ -61,19 +67,16 @@ const Home = () => {
         setAscending={setAscending}
         setPage={setPage}
         setToggleFiltering={setToggleFiltering}
+        setOpenFilterDialog={setOpenFilterDialog}
+        openFilterDialog={openFilterDialog}
       />
 
-      {reviews.map((review, i) => (
-        <ReviewCard key={`${review.review_id}${i}`} review={review} />
-      ))}
-      <Stack spacing={2}>
-        <Pagination
-          count={Math.ceil(reviewsCount / 10)}
-          page={page}
-          variant="outlined"
-          onChange={handlePagination}
-        />
-      </Stack>
+      <ReviewsList
+        page={page}
+        setPage={setPage}
+        reviews={reviews}
+        reviewsCount={reviewsCount}
+      />
     </Container>
   );
 };
