@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Box, Avatar, Grid } from "@mui/material";
 import { getUser, voteComment } from "../utils/apiRequests";
 import useAuth from "../hooks/useAuth";
+import * as moment from "moment";
 
 const CommentItem = ({ comment, voteCom, deleteComment }) => {
   const [author, setAuthor] = useState(null);
@@ -27,7 +28,12 @@ const CommentItem = ({ comment, voteCom, deleteComment }) => {
           <Avatar src={author.avatar_url} />
           <p>{author.name}</p>
           <p>{currentComment.body}</p>
-          <p>{currentComment.created_at}</p>
+          <p>
+            {moment(
+              currentComment.created_at.toString(),
+              "YYYYMMDD HH:mm:ss"
+            ).fromNow()}
+          </p>
           <button onClick={vote}>Vote</button> {currentComment.votes}
           {comment.author === user.username && (
             <button

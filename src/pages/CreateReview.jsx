@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { getCategories, postReview } from "../utils/apiRequests";
 import { Container, Grid, Box, TextField, Button } from "@mui/material";
 import useAuth from "../hooks/useAuth";
+
 const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [designer, setDesigner] = useState("");
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState("");
+  const [errorInput, setErrorInput] = useState(false);
 
   const { user } = useAuth();
 
@@ -23,7 +25,19 @@ const CreatePost = () => {
       designer,
       category,
     };
-    console.log(reviewBody);
+    if (
+      title.length > 0 &&
+      body.length > "" &&
+      designer.length > 0 &&
+      category.length > 0
+    ) {
+      console.log(reviewBody);
+      setErrorInput(false);
+      postReview(reviewBody);
+    } else {
+      console.log("error");
+      setErrorInput(true);
+    }
   };
   return (
     <div>
@@ -62,12 +76,3 @@ const CreatePost = () => {
 };
 
 export default CreatePost;
-
-// const reviewBody = {
-//   owner: "dav3rid",
-//   title: "Awesome game",
-//   review_body:
-//     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-//   designer: "Akihisa Okui",
-//   category: "euro game",
-// };

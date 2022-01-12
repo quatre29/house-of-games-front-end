@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import * as moment from "moment";
+
 import {
   Grid,
   Paper,
@@ -44,7 +46,12 @@ const ReviewCard = ({ review }) => {
                 </Link>
               </Grid>
               <Grid item xs={12} className={classes.date}>
-                <Typography variant="body2">2 days ago</Typography>
+                <Typography variant="body2">
+                  {moment(
+                    review.created_at.toString(),
+                    "YYYYMMDD HH:mm:ss"
+                  ).fromNow()}
+                </Typography>
               </Grid>
               <Grid item xs={12}>
                 <Link

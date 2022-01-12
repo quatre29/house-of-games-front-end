@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import * as moment from "moment";
 import {
   getCommentsByReview,
   getReview,
@@ -69,7 +70,12 @@ const ReviewPage = () => {
           <img src={review.review_img_url} width="300px" height="300px" />
           <h1>{review.title}</h1>
           <h4>{review.category}</h4>
-          <p>{review.created_at}</p>
+          <p>
+            {moment(
+              review.created_at.toString(),
+              "YYYYMMDD HH:mm:ss"
+            ).fromNow()}
+          </p>
           <p>{review.owner}</p>
           <p>Designer of Game: {review.review_body}</p>
           <p>{review.designer}</p>

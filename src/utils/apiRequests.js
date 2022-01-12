@@ -14,9 +14,12 @@ export const getReview = async (review_id) => {
   return review.data.review;
 };
 
-export const getAllReviews = async () => {
-  const reviews = await api.get(`/api/reviews`);
-  return reviews.data.reviews;
+export const getAllReviews = async (page) => {
+  const reviews = await api.get(`/api/reviews?page=${page}`);
+  return {
+    reviews: reviews.data.reviews,
+    totalCount: reviews.data.total_count,
+  };
 };
 
 export const getCategories = async () => {
@@ -68,9 +71,9 @@ export const removeComment = async (comment_id) => {
   }
 };
 
-export const postReview = async (review) => {
+export const postReview = async (reviewBody) => {
   try {
-    const review = await api.post(`/reviews`, review);
+    const review = await api.post(`/api/reviews`, reviewBody);
     console.log(review);
     return review.data.review;
   } catch (error) {
