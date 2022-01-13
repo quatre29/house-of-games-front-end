@@ -175,11 +175,11 @@ const ReviewPage = () => {
                       variant="body2"
                       className={classes.designerText}
                     >
-                      Game Designer: {review.review_body}
+                      Game Designer: {review.designer}
                     </Typography>
                   </Grid>
                   <Grid item xs={12} className={classes.bodyContainer}>
-                    <p className={classes.bodyText}>{review.designer}</p>
+                    <p className={classes.bodyText}>{review.review_body}</p>
                   </Grid>
                   <Grid item xs={12}></Grid>
                 </Grid>
