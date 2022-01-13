@@ -62,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
   },
   designerText: {
     color: theme.palette.mode === "light" ? deepPurple[700] : grey[100],
+    fontStyle: "italic",
   },
 
   bodyContainer: {},

@@ -53,7 +53,6 @@ const ReviewPage = () => {
 
   const deleteComment = (id, author) => {
     if (author === user.username) {
-      console.log(id, author);
       const newState = comments.filter((com) => com.comment_id !== id);
       setComments(newState);
       removeComment(id);
@@ -71,9 +70,10 @@ const ReviewPage = () => {
   };
 
   const submitPost = () => {
-    postComment(review_id, commentBody, user.username).then((data) =>
-      setComments((prevState) => [data, ...prevState])
-    );
+    postComment(review_id, commentBody, user.username).then((data) => {
+      setComments((prevState) => [data, ...prevState]);
+      setCommentBody("");
+    });
   };
 
   const toggleShowComments = () => {
@@ -156,7 +156,7 @@ const ReviewPage = () => {
                       variant="body2"
                       className={classes.designerText}
                     >
-                      Designer of Game: {review.review_body}
+                      Game Designer: {review.review_body}
                     </Typography>
                   </Grid>
                   <Grid item xs={12} className={classes.bodyContainer}>
@@ -175,11 +175,11 @@ const ReviewPage = () => {
                         endIcon={<KeyboardArrowDown />}
                         onClick={toggleShowComments}
                       >
-                        <typography variant="body2">
+                        <Typography variant="body2">
                           {showComments
                             ? `hide comments(${review.comment_count})`
                             : `show comments(${review.comment_count})`}
-                        </typography>
+                        </Typography>
                       </Button>
                     </Grid>
                     <Grid item xs={12} className={classes.commentsContent}>
