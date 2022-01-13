@@ -15,7 +15,9 @@ const useStyles = makeStyles((theme) => ({
   },
   voteText: {
     color: theme.palette.mode === "light" ? deepPurple[400] : grey[400],
+    paddingBottom: theme.spacing(2),
   },
+
   //-------------------------- review
   votesContainer: {
     marginTop: theme.spacing(4),

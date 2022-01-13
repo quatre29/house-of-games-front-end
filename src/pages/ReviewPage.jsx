@@ -1,12 +1,17 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { ColorModeContext } from "../styles/Theme";
 import * as moment from "moment";
-import { KeyboardArrowDown, Favorite } from "@mui/icons-material";
+import {
+  KeyboardArrowDown,
+  Favorite,
+  Delete as DeleteIcon,
+} from "@mui/icons-material";
 import {
   getCommentsByReview,
   getReview,
   removeComment,
+  removeReview,
   voteReview,
 } from "../utils/apiRequests";
 import {
@@ -37,6 +42,7 @@ const ReviewPage = () => {
   const classes = useStyles();
   const { user } = useAuth();
   const { mode } = useContext(ColorModeContext);
+  const navigate = useNavigate();
 
   const { review_id } = useParams();
   useEffect(() => {
@@ -49,6 +55,12 @@ const ReviewPage = () => {
       ...prevState,
       votes: prevState["votes"] + 1,
     }));
+  };
+
+  const deleteReview = () => {
+    removeReview(review_id).then(() => {
+      navigate("/");
+    });
   };
 
   const deleteComment = (id, author) => {
@@ -92,6 +104,13 @@ const ReviewPage = () => {
             <Typography className={classes.voteText} variant="h4">
               {review && review.votes}
             </Typography>
+            <IconButton
+              onClick={deleteReview}
+              aria-label="delete"
+              color="primary"
+            >
+              <DeleteIcon fontSize="large" />
+            </IconButton>
           </Box>
         </Grid>
         <Grid item xs={10}>

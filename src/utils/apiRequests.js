@@ -74,6 +74,10 @@ export const removeComment = async (comment_id) => {
   }
 };
 
+export const removeReview = async (review_id) => {
+  return await api.delete(`/api/reviews/${review_id}`);
+};
+
 export const postReview = async (reviewBody) => {
   try {
     const review = await api.post(`/api/reviews`, reviewBody);
