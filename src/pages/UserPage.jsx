@@ -19,13 +19,13 @@ const UserPage = () => {
   }, []);
 
   return (
-    <Container>
+    <Container maxWidth="xs">
       <CustomPaper>
         <Box className={classes.userContainer}>
           {currentUser ? (
             <>
               <Avatar
-                // sx={{ width: 56, height: 56 }}
+                sx={{ width: "300px", height: "300px" }}
                 className={classes.avatar}
                 src={currentUser.avatar_url}
               />

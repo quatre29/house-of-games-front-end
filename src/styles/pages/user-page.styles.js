@@ -7,8 +7,8 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   avatar: {
-    width: "100px",
-    height: "100px",
+    width: "300px",
+    height: "300px",
   },
 }));
 
