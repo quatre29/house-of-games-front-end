@@ -94,6 +94,7 @@ const AvatarDropMenu = () => {
                     <Link
                       state={{ username: user.username }}
                       to={`/my-profile`}
+                      className={classes.menuLink}
                     >
                       Profile
                     </Link>

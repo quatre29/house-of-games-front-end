@@ -52,6 +52,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   navItem: {},
+  menuLink: {
+    textDecoration: "none",
+    color: "inherit",
+  },
 }));
 
 export default useStyles;

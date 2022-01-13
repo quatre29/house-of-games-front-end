@@ -35,7 +35,7 @@ function App() {
             <Route path="/reviews/:review_id" element={<ReviewPage />} />
             <Route path="/*" element={<PageNotFound />} />
           </Routes>
-          <Footer />
+          <Footer className={classes.footer} />
         </>
       ) : (
         <Login />
