@@ -44,6 +44,8 @@ const ReviewPage = () => {
   const { mode } = useContext(ColorModeContext);
   const navigate = useNavigate();
 
+  console.log(review);
+
   const { review_id } = useParams();
   useEffect(() => {
     getReview(review_id).then((data) => setReview(data));
@@ -104,13 +106,15 @@ const ReviewPage = () => {
             <Typography className={classes.voteText} variant="h4">
               {review && review.votes}
             </Typography>
-            <IconButton
-              onClick={deleteReview}
-              aria-label="delete"
-              color="primary"
-            >
-              <DeleteIcon fontSize="large" />
-            </IconButton>
+            {review && user.username === review.owner && (
+              <IconButton
+                onClick={deleteReview}
+                aria-label="delete"
+                color="primary"
+              >
+                <DeleteIcon fontSize="large" />
+              </IconButton>
+            )}
           </Box>
         </Grid>
         <Grid item xs={10}>
