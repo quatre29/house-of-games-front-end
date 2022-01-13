@@ -1,3 +1,4 @@
+import { deepPurple, grey } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -9,6 +10,9 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     width: "300px",
     height: "300px",
+  },
+  userTitle: {
+    color: theme.palette.mode === "light" ? deepPurple[600] : grey[200],
   },
 }));
 

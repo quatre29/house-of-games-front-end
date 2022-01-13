@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Container, Box, Avatar, CircularProgress } from "@mui/material";
+import {
+  Grid,
+  Container,
+  Box,
+  Avatar,
+  CircularProgress,
+  Typography,
+} from "@mui/material";
 import { useParams, useLocation } from "react-router-dom";
 import { getUser } from "../utils/apiRequests";
 import useStyles from "../styles/pages/user-page.styles";
@@ -29,8 +36,10 @@ const UserPage = () => {
                 className={classes.avatar}
                 src={currentUser.avatar_url}
               />
-              <h1>{currentUser.name}</h1>
-              <p>@{currentUser.username}</p>
+              <h1 className={classes.userTitle}>{currentUser.name}</h1>
+              <Typography className={classes.userTitle}>
+                @{currentUser.username}
+              </Typography>
             </>
           ) : (
             <CircularProgress color="primary" />

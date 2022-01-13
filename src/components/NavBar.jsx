@@ -16,6 +16,7 @@ import {
   WbSunny,
   Search as SearchIcon,
   Mail as MailIcon,
+  HomeRounded,
 } from "@mui/icons-material";
 import { ColorModeContext } from "../styles/Theme";
 import useStyles from "../styles/components/nav-bar.styles";
@@ -27,6 +28,10 @@ const NavBar = () => {
   const { mode, toggleColorMode } = useContext(ColorModeContext);
   const classes = useStyles();
   const navigate = useNavigate();
+
+  const goBackHome = () => {
+    navigate("/");
+  };
 
   const darkModeButton =
     mode === "light" ? (
@@ -43,7 +48,10 @@ const NavBar = () => {
     <AppBar position="static">
       <Container maxWidth="lg">
         <Toolbar>
-          <Typography variant="h5">House of Games</Typography>
+          <IconButton onClick={goBackHome}>
+            <HomeRounded fontSize="large" />
+          </IconButton>
+          <Typography variant="h6">House of Games</Typography>
           <Box sx={{ flexGrow: 1 }} />
 
           <Box className={classes.searchContainer}>
