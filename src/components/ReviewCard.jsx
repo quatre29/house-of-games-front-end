@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import * as moment from "moment";
 
 import {
@@ -17,12 +17,14 @@ import useStyles from "../styles/components/review-card.styles";
 import useAuth from "../hooks/useAuth";
 import { getUser } from "../utils/apiRequests";
 import { deepPurple } from "@mui/material/colors";
+import { ColorModeContext } from "../styles/Theme";
 
 const ReviewCard = ({ review }) => {
   const [userReview, setUserReview] = useState(null);
   const { user } = useAuth();
   const classes = useStyles();
   const navigate = useNavigate();
+  const { mode } = useContext(ColorModeContext);
 
   useEffect(() => {
     getUser(review.owner).then((data) => setUserReview(data));
@@ -93,11 +95,11 @@ const ReviewCard = ({ review }) => {
                   onClick={handleCategoryChip}
                   clickable
                   sx={{
-                    color: deepPurple[700],
-                    backgroundColor: "#ddd5ec",
-                    border: `1px solid ${deepPurple[200]}`,
+                    color: mode === "light" && deepPurple[700],
+                    backgroundColor: mode === "light" && "#ddd5ec",
+                    border: mode === "light" && `1px solid ${deepPurple[200]}`,
                     "&:hover": {
-                      backgroundColor: deepPurple[100],
+                      backgroundColor: mode === "light" && deepPurple[100],
                     },
                   }}
                 />

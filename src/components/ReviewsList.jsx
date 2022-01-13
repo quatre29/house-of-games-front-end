@@ -3,6 +3,7 @@ import { Paper, Pagination, Stack, Box } from "@mui/material";
 import useStyles from "../styles/components/reviews-list.styles";
 import ReviewCard from "./ReviewCard";
 import { deepPurple } from "@mui/material/colors";
+import CustomPaper from "./CustomPaper";
 
 const ReviewsList = ({ page, setPage, reviews, reviewsCount = 0 }) => {
   const classes = useStyles();
@@ -12,13 +13,7 @@ const ReviewsList = ({ page, setPage, reviews, reviewsCount = 0 }) => {
   };
 
   return (
-    <Paper
-      className={classes.reviewsContainer}
-      sx={(theme) => ({
-        backgroundColor: theme.palette.mode === "light" && deepPurple[100],
-      })}
-      elevation={3}
-    >
+    <CustomPaper>
       {reviews.map((review, i) => (
         <ReviewCard key={`${review.review_id}${i}`} review={review} />
       ))}
@@ -32,7 +27,7 @@ const ReviewsList = ({ page, setPage, reviews, reviewsCount = 0 }) => {
           />
         </Stack>
       </Box>
-    </Paper>
+    </CustomPaper>
   );
 };
 
