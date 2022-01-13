@@ -10,6 +10,7 @@ import {
   CardMedia,
   Badge,
   Chip,
+  CircularProgress,
 } from "@mui/material";
 import { Favorite, ChatBubble } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
@@ -125,7 +126,7 @@ const ReviewCard = ({ review }) => {
           </Grid>
         </Grid>
       ) : (
-        <p>Loading...</p>
+        <CircularProgress color="primary" />
       )}
       <CardMedia
         component="img"

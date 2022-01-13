@@ -14,8 +14,7 @@ const Footer = () => {
           <Box className={classes.textContainer}>
             <Typography variant="caption" className={classes.text}>
               This website was made for Front-End project week at Northcoders
-              Bootcamp. It was connected with the project from the Back-End
-              week.
+              Bootcamp. It is connected with the project from the Back-End week.
             </Typography>
 
             <Typography className={classes.text} variant="caption">

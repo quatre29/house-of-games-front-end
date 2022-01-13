@@ -1,5 +1,5 @@
 import React from "react";
-import { Paper, Pagination, Stack, Box } from "@mui/material";
+import { Paper, Pagination, Stack, Box, CircularProgress } from "@mui/material";
 import useStyles from "../styles/components/reviews-list.styles";
 import ReviewCard from "./ReviewCard";
 import { deepPurple } from "@mui/material/colors";
@@ -10,13 +10,18 @@ const ReviewsList = ({ page, setPage, reviews, reviewsCount = 0 }) => {
 
   const handlePagination = (event, value) => {
     setPage(value);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
   return (
     <CustomPaper>
-      {reviews.map((review, i) => (
-        <ReviewCard key={`${review.review_id}${i}`} review={review} />
-      ))}
+      {reviews.length > 0 ? (
+        reviews.map((review, i) => (
+          <ReviewCard key={`${review.review_id}${i}`} review={review} />
+        ))
+      ) : (
+        <CircularProgress color="primary" />
+      )}
       <Box className={classes.paginationContainer}>
         <Stack spacing={2}>
           <Pagination

@@ -15,6 +15,7 @@ import useStyles from "../styles/pages/home.styles";
 import FilterReviews from "../components/FilterReviews";
 import { useNavigate } from "react-router-dom";
 import ReviewsList from "../components/ReviewsList";
+import BackToTop from "../components/BackToTop";
 
 const Home = () => {
   const [reviews, setReviews] = useState([]);
@@ -77,6 +78,9 @@ const Home = () => {
         reviews={reviews}
         reviewsCount={reviewsCount}
       />
+      <Box className={classes.backToTop}>
+        <BackToTop />
+      </Box>
     </Container>
   );
 };

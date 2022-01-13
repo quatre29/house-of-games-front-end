@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Container, Box, Avatar } from "@mui/material";
+import { Grid, Container, Box, Avatar, CircularProgress } from "@mui/material";
 import { useParams, useLocation } from "react-router-dom";
 import { getUser } from "../utils/apiRequests";
+import useStyles from "../styles/pages/user-page.styles";
+import CustomPaper from "../components/CustomPaper";
 
 const UserPage = () => {
   const [currentUser, setCurrentUser] = useState(null);
   const { username } = useParams();
   const { state } = useLocation();
+
+  const classes = useStyles();
 
   useEffect(() => {
     const user = state === null ? username : state.username;
@@ -16,15 +20,23 @@ const UserPage = () => {
 
   return (
     <Container>
-      {currentUser ? (
-        <>
-          <Avatar src={currentUser.avatar_url} />
-          <h1>{currentUser.name}</h1>
-          <p>@{currentUser.username}</p>
-        </>
-      ) : (
-        <p>Loading...</p>
-      )}
+      <CustomPaper>
+        <Box className={classes.userContainer}>
+          {currentUser ? (
+            <>
+              <Avatar
+                // sx={{ width: 56, height: 56 }}
+                className={classes.avatar}
+                src={currentUser.avatar_url}
+              />
+              <h1>{currentUser.name}</h1>
+              <p>@{currentUser.username}</p>
+            </>
+          ) : (
+            <CircularProgress color="primary" />
+          )}
+        </Box>
+      </CustomPaper>
     </Container>
   );
 };

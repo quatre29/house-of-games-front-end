@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
   text: {
     textAlign: "center",
     paddingBottom: theme.spacing(1),
+    color: theme.palette.mode === "light" ? deepPurple[400] : grey[400],
   },
   socialsContainer: {
     display: "flex",
