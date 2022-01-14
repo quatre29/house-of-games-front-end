@@ -106,7 +106,7 @@ const useStyles = makeStyles((theme) => ({
 
   commentTextAreaError: {
     color: theme.palette.mode === "light" ? deepPurple[700] : grey[900],
-    fontFamily: "monospace",
+    fontFamily: "roboto",
     borderColor: theme.palette.error.main,
     padding: theme.spacing(2),
     lineHeight: "1",
