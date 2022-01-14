@@ -1,26 +1,17 @@
 import React, { useEffect, useState } from "react";
-import ReviewCard from "../components/ReviewCard";
 
 import useAuth from "../hooks/useAuth";
-import { getAllReviews, getCategories } from "../utils/apiRequests";
-import {
-  Container,
-  Box,
-  Button,
-  Pagination,
-  Stack,
-  Paper,
-} from "@mui/material";
+import { getAllReviews } from "../utils/apiRequests";
+import { Container, Box, Button } from "@mui/material";
 import useStyles from "../styles/pages/home.styles";
 import FilterReviews from "../components/FilterReviews";
-import { useNavigate } from "react-router-dom";
 import ReviewsList from "../components/ReviewsList";
 import BackToTop from "../components/BackToTop";
+import CategoriesList from "../components/CategoriesList";
 
 const Home = () => {
   const [reviews, setReviews] = useState([]);
   const [reviewsCount, setReviewsCount] = useState(0);
-  const [categories, setCategories] = useState([]);
   const [page, setPage] = useState(1);
 
   const [sortBy, setSortBy] = useState("");
@@ -29,11 +20,6 @@ const Home = () => {
   const [openFilterDialog, setOpenFilterDialog] = useState(false);
 
   const classes = useStyles();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    getCategories().then((data) => setCategories(data));
-  }, []);
 
   useEffect(() => {
     getAllReviews(page, sortBy, ascending).then((data) => {
@@ -42,24 +28,11 @@ const Home = () => {
     });
   }, [page, toggleFiltering]);
 
-  const goToCategory = (category) => {
-    navigate(`/categories/${category.slug}`, { state: { category } });
-  };
-
   return (
     <Container maxWidth="md" className={classes.homeContainer}>
-      <Box>
-        {categories.map((category, i) => (
-          <Button
-            key={`${category}${i}`}
-            onClick={() => goToCategory(category)}
-          >
-            {category.slug}
-          </Button>
-        ))}
-      </Box>
+      <CategoriesList />
       <Button variant="contained" onClick={() => setOpenFilterDialog(true)}>
-        Filter options
+        Sort options
       </Button>
       <FilterReviews
         ascending={ascending}

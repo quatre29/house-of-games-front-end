@@ -2,13 +2,13 @@ import React, { useContext } from "react";
 import { Paper, Box, Typography, Button } from "@mui/material";
 import { ColorModeContext } from "./styles/Theme";
 import useStyles from "./styles/app.styles";
-import { Routes, Route, Redirect } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import NavBar from "./components/NavBar";
 import Login from "./pages/Login";
 import useAuth from "./hooks/useAuth";
 import Footer from "./components/Footer";
-import CategoryList from "./pages/CategoryList";
+import CategoryListPage from "./pages/CategoryListPage";
 import UserPage from "./pages/UserPage";
 import ReviewPage from "./pages/ReviewPage";
 import CreateReview from "./pages/CreateReview";
@@ -27,13 +27,17 @@ function App() {
           <NavBar />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/categories/:category" element={<CategoryList />} />
+            <Route
+              path="/categories/:category"
+              element={<CategoryListPage />}
+            />
             <Route path="/users/:username" element={<UserPage />} />
             <Route path="/my-profile" element={<UserPage />} />
             <Route path="/new" element={<CreateReview />} />
 
             <Route path="/reviews/:review_id" element={<ReviewPage />} />
             <Route path="/*" element={<PageNotFound />} />
+            <Route path="/not-found" element={<PageNotFound />} />
           </Routes>
           <Footer className={classes.footer} />
         </>

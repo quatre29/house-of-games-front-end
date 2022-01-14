@@ -48,7 +48,11 @@ const ReviewPage = () => {
 
   const { review_id } = useParams();
   useEffect(() => {
-    getReview(review_id).then((data) => setReview(data));
+    getReview(review_id)
+      .then((data) => setReview(data))
+      .catch((err) => {
+        navigate("/not-found");
+      });
   }, []);
 
   const voteRev = () => {
@@ -260,8 +264,6 @@ const ReviewPage = () => {
                     </Grid>
                   </Grid>
                 </Grid>
-                <p></p>
-                <div></div>
               </>
             ) : (
               <p>Loading...</p>
