@@ -103,6 +103,22 @@ const useStyles = makeStyles((theme) => ({
       }`,
     },
   },
+
+  commentTextAreaError: {
+    color: theme.palette.mode === "light" ? deepPurple[700] : grey[900],
+    fontFamily: "monospace",
+    borderColor: theme.palette.error.main,
+    padding: theme.spacing(2),
+    lineHeight: "1",
+    borderRadius: "5px",
+    width: "100%",
+    resize: "none",
+    outline: "none",
+    border: `2px solid ${theme.palette.error.main}`,
+    "&::placeholder": {
+      color: theme.palette.error.main,
+    },
+  },
 }));
 
 export default useStyles;

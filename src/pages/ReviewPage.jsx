@@ -25,6 +25,7 @@ import {
   Typography,
   Avatar,
   IconButton,
+  CircularProgress,
 } from "@mui/material";
 import { deepPurple } from "@mui/material/colors";
 import CommentItem from "../components/CommentItem";
@@ -38,13 +39,12 @@ const ReviewPage = () => {
   const [commentBody, setCommentBody] = useState("");
   const [comments, setComments] = useState(null);
   const [showComments, setShowComments] = useState(false);
+  const [commentError, setCommentError] = useState(false);
 
   const classes = useStyles();
   const { user } = useAuth();
   const { mode } = useContext(ColorModeContext);
   const navigate = useNavigate();
-
-  console.log(review);
 
   const { review_id } = useParams();
   useEffect(() => {
@@ -83,11 +83,16 @@ const ReviewPage = () => {
     setComments(newState);
   };
 
-  const submitPost = () => {
-    postComment(review_id, commentBody, user.username).then((data) => {
-      setComments((prevState) => [data, ...prevState]);
-      setCommentBody("");
-    });
+  const submitComment = () => {
+    if (commentBody.length > 0) {
+      postComment(review_id, commentBody, user.username).then((data) => {
+        setComments((prevState) => [data, ...prevState]);
+        setCommentBody("");
+        setCommentError(false);
+      });
+    } else {
+      setCommentError(true);
+    }
   };
 
   const toggleShowComments = () => {
@@ -218,14 +223,22 @@ const ReviewPage = () => {
                                 onChange={(e) => setCommentBody(e.target.value)}
                               /> */}
                               <textarea
-                                className={classes.commentTextArea}
+                                className={
+                                  commentError
+                                    ? classes.commentTextAreaError
+                                    : classes.commentTextArea
+                                }
                                 name="comment"
                                 rows="3"
-                                placeholder="Write a comment"
+                                placeholder={
+                                  commentError
+                                    ? `Comment body cannot be empty`
+                                    : `Write a comment`
+                                }
                                 value={commentBody}
                                 onChange={(e) => setCommentBody(e.target.value)}
                               ></textarea>
-                              <Button onClick={submitPost}>Post</Button>
+                              <Button onClick={submitComment}>Post</Button>
                             </Grid>
                           </Grid>
                           <Box className={classes.commentsSecondContainer}>
@@ -239,7 +252,7 @@ const ReviewPage = () => {
                                 />
                               ))
                             ) : (
-                              <p>Loading...</p>
+                              <CircularProgress />
                             )}
                           </Box>
                         </Box>
