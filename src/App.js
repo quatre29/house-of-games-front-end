@@ -13,6 +13,7 @@ import UserPage from "./pages/UserPage";
 import ReviewPage from "./pages/ReviewPage";
 import CreateReview from "./pages/CreateReview";
 import PageNotFound from "./pages/PageNotFound";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
   const { mode, toggleColorMode } = useContext(ColorModeContext);
@@ -34,6 +35,7 @@ function App() {
             <Route path="/users/:username" element={<UserPage />} />
             <Route path="/my-profile" element={<UserPage />} />
             <Route path="/new" element={<CreateReview />} />
+            <Route path="/search" element={<SearchPage />} />
 
             <Route path="/reviews/:review_id" element={<ReviewPage />} />
             <Route path="/*" element={<PageNotFound />} />

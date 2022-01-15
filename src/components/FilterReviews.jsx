@@ -69,7 +69,7 @@ const FilterReviews = ({
           },
         }}
       >
-        <DialogTitle>Filter Reviews</DialogTitle>
+        <DialogTitle>Sort Reviews</DialogTitle>
         <DialogContent>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Sort by...</InputLabel>

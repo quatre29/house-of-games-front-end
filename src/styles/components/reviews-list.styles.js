@@ -14,6 +14,15 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
   },
+  notFoundContainer: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  notFound: {
+    color:
+      theme.palette.mode === "light" ? theme.palette.primary.main : grey[100],
+  },
 }));
 
 export default useStyles;

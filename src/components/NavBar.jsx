@@ -14,7 +14,6 @@ import {
 import {
   DarkMode,
   WbSunny,
-  Search as SearchIcon,
   Mail as MailIcon,
   HomeRounded,
 } from "@mui/icons-material";
@@ -23,6 +22,7 @@ import useStyles from "../styles/components/nav-bar.styles";
 import AvatarDropMenu from "./AvatarDropMenu";
 import { useNavigate } from "react-router-dom";
 import { deepPurple } from "@mui/material/colors";
+import SearchItem from "./SearchItem";
 
 const NavBar = () => {
   const { mode, toggleColorMode } = useContext(ColorModeContext);
@@ -53,7 +53,7 @@ const NavBar = () => {
           </IconButton>
           <Typography variant="h6">House of Games</Typography>
           <Box sx={{ flexGrow: 1 }} />
-
+          {/* 
           <Box className={classes.searchContainer}>
             <Box className={classes.searchIconWrapper}>
               <SearchIcon />
@@ -63,7 +63,8 @@ const NavBar = () => {
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
             />
-          </Box>
+          </Box> */}
+          <SearchItem />
 
           <Box sx={{ flexGrow: 1 }} />
           <Box className={classes.navItem}>

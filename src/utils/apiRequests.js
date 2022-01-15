@@ -87,3 +87,20 @@ export const postReview = async (reviewBody) => {
     console.log(error);
   }
 };
+
+export const searchFilteredReviewsByTitle = async (term) => {
+  try {
+    const reviews = await api.get(`/api/reviews/filtered?title=${term}`);
+    return reviews.data.reviews;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const searchFilteredReviewsByOwner = async (term) => {
+  try {
+    const reviews = await api.get(`/api/reviews/filtered?owner=${term}`);
+    return reviews.data.reviews;
+  } catch (error) {
+    console.log(error);
+  }
+};

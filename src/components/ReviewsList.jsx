@@ -1,11 +1,19 @@
-import React from "react";
-import { Paper, Pagination, Stack, Box, CircularProgress } from "@mui/material";
+import React, { useState } from "react";
+import {
+  Paper,
+  Pagination,
+  Stack,
+  Box,
+  CircularProgress,
+  Typography,
+} from "@mui/material";
 import useStyles from "../styles/components/reviews-list.styles";
 import ReviewCard from "./ReviewCard";
 import { deepPurple } from "@mui/material/colors";
 import CustomPaper from "./CustomPaper";
 
 const ReviewsList = ({ page, setPage, reviews, reviewsCount = 0 }) => {
+  const [isLoading, setIsLoading] = useState(true);
   const classes = useStyles();
 
   const handlePagination = (event, value) => {
@@ -20,7 +28,11 @@ const ReviewsList = ({ page, setPage, reviews, reviewsCount = 0 }) => {
           <ReviewCard key={`${review.review_id}${i}`} review={review} />
         ))
       ) : (
-        <CircularProgress color="primary" />
+        <Box className={classes.notFoundContainer}>
+          <Typography variant="h3" className={classes.notFound}>
+            No reviews found
+          </Typography>
+        </Box>
       )}
       <Box className={classes.paginationContainer}>
         <Stack spacing={2}>

@@ -1,6 +1,6 @@
 import { makeStyles } from "@mui/styles";
 import { alpha } from "@mui/material/styles";
-import { blueGrey } from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 
 const useStyles = makeStyles((theme) => ({
   searchContainer: {
@@ -17,18 +17,19 @@ const useStyles = makeStyles((theme) => ({
       width: "auto",
     },
   },
-  // searchIconWrapper: {
-  //   padding: theme.spacing(0, 2),
-  //   height: "100%",
-  //   position: "absolute",
-  //   pointerEvents: "none",
-  //   display: "flex",
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  // },
+  searchIconWrapper: {
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   inputBase: {
-    color: "inherit",
     "& .MuiInputBase-input": {
+      color: grey[50],
+
       padding: theme.spacing(1, 1, 1, 0),
       // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em + ${theme.spacing(4)})`,
@@ -41,20 +42,6 @@ const useStyles = makeStyles((theme) => ({
         },
       },
     },
-  },
-  avatarMenuContainer: {
-    border: "4px solid transparent",
-    borderRadius: "50%",
-    padding: "1px",
-    "&:hover": {
-      border: `4px solid ${blueGrey[50]}`,
-      cursor: "pointer",
-    },
-  },
-  navItem: {},
-  menuLink: {
-    textDecoration: "none",
-    color: "inherit",
   },
 }));
 
