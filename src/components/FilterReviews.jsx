@@ -74,16 +74,47 @@ const FilterReviews = ({
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Sort by...</InputLabel>
             <Select
+              sx={(theme) => ({ color: theme.palette.primary.main })}
               value={sortBy}
               label="Sort By"
               onChange={(e) => setSortBy(e.target.value)}
             >
-              <MenuItem value="votes">Votes</MenuItem>
-              <MenuItem value="comments">Comments</MenuItem>
-              <MenuItem value="designer">Designer</MenuItem>
-              <MenuItem value="title">Title</MenuItem>
-              <MenuItem value="owner">Owner</MenuItem>
-              <MenuItem value="date">Date</MenuItem>
+              <MenuItem
+                sx={(theme) => ({ color: theme.palette.primary.main })}
+                value="votes"
+              >
+                Votes
+              </MenuItem>
+              <MenuItem
+                sx={(theme) => ({ color: theme.palette.primary.main })}
+                value="comments"
+              >
+                Comments
+              </MenuItem>
+              <MenuItem
+                sx={(theme) => ({ color: theme.palette.primary.main })}
+                value="designer"
+              >
+                Designer
+              </MenuItem>
+              <MenuItem
+                sx={(theme) => ({ color: theme.palette.primary.main })}
+                value="title"
+              >
+                Title
+              </MenuItem>
+              <MenuItem
+                sx={(theme) => ({ color: theme.palette.primary.main })}
+                value="owner"
+              >
+                Owner
+              </MenuItem>
+              <MenuItem
+                sx={(theme) => ({ color: theme.palette.primary.main })}
+                value="date"
+              >
+                Date
+              </MenuItem>
             </Select>
           </FormControl>
           <Box>

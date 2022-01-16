@@ -39,7 +39,7 @@ const SearchPage = () => {
   };
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="md">
       <TabContext value={tabValue}>
         <Box sx={{ width: "100%" }}>
           <TabList indicatorColor="primary" onChange={handleTabChange}>

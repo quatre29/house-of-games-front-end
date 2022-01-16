@@ -17,19 +17,29 @@ import {
 import useAuth from "../hooks/useAuth";
 import CustomPaper from "../components/CustomPaper";
 import useStyles from "../styles/pages/create-review.styles";
-import { useNavigate } from "react-router-dom";
 
 const CreatePost = () => {
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const [designer, setDesigner] = useState("");
-  const [category, setCategory] = useState("");
+  const [title, setTitle] = useState({
+    inputError: false,
+    input: "",
+  });
+  const [body, setBody] = useState({
+    inputError: false,
+    input: "",
+  });
+  const [designer, setDesigner] = useState({
+    inputError: false,
+    input: "",
+  });
+  const [category, setCategory] = useState({
+    inputError: false,
+    input: "",
+  });
   const [categories, setCategories] = useState("");
   const [errorInput, setErrorInput] = useState(false);
 
   const classes = useStyles();
   const { user } = useAuth();
-  const navigation = useNavigate();
 
   useEffect(() => {
     getCategories().then((data) => setCategories(data));
@@ -38,28 +48,67 @@ const CreatePost = () => {
   const submitReview = () => {
     const reviewBody = {
       owner: user.username,
-      title,
-      review_body: body,
-      designer,
-      category,
+      title: title.input,
+      review_body: body.input,
+      designer: designer.input,
+      category: category.input,
     };
+
+    if (title.input.length < 0)
+      setTitle((prevState) => ({ ...prevState, errorInput: true }));
+
+    if (body.input.length < 0)
+      setBody((prevState) => ({ ...prevState, errorInput: true }));
+
+    if (designer.input.length < 0)
+      setDesigner((prevState) => ({ ...prevState, errorInput: true }));
+
+    if (category.input.length < 0)
+      setCategory((prevState) => ({ ...prevState, errorInput: true }));
+
     if (
-      title.length > 0 &&
-      body.length > "" &&
-      designer.length > 0 &&
-      category.length > 0
+      !title.errorInput &&
+      !body.errorInput &&
+      !designer.errorInput &&
+      !category.errorInput
     ) {
       console.log(reviewBody);
       setErrorInput(false);
-      postReview(reviewBody).then((data) => {
-        console.log(data, "8888888888888888");
-        navigation(`/reviews/${data.review_id}`);
-      });
+      // postReview(reviewBody);
     } else {
       console.log("error");
       setErrorInput(true);
     }
   };
+
+  const onChangeCategory = (e) => {
+    setCategory((prevState) => ({
+      ...prevState,
+      input: e.target.value,
+    }));
+  };
+
+  const onChangeTitle = (e) => {
+    setTitle((prevState) => ({
+      ...prevState,
+      input: e.target.value,
+    }));
+  };
+
+  const onChangeDesigner = (e) => {
+    setDesigner((prevState) => ({
+      ...prevState,
+      input: e.target.value,
+    }));
+  };
+
+  const onChangeBody = (e) => {
+    setBody((prevState) => ({
+      ...prevState,
+      input: e.target.value,
+    }));
+  };
+
   return (
     <CustomPaper>
       <Box className={classes.container}>
@@ -69,8 +118,8 @@ const CreatePost = () => {
               variant="h2"
               component={InputBase}
               placeholder="Add title..."
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={title.input}
+              onChange={(e) => onChangeTitle(e)}
               required
               label="Title"
               name="title"
@@ -79,24 +128,17 @@ const CreatePost = () => {
               // multiline
               sx={(theme) => ({
                 fontWeight: "bold",
-                color:
-                  errorInput && title.length < 1
-                    ? "red"
-                    : theme.palette.primary.main,
+                color: theme.palette.primary.main,
               })}
             />
             <FormControl fullWidth>
-              <InputLabel
-                sx={(theme) => ({ color: theme.palette.primary.main })}
-                id="demo-simple-select-label"
-              >
-                Category
-              </InputLabel>
+              <InputLabel id="demo-simple-select-label">Category</InputLabel>
               <Select
-                error={errorInput && category.length < 1 && true}
-                value={category}
+                error={true}
+                value={category.input}
                 label="Select category"
-                onChange={(e) => setCategory(e.target.value)}
+                onChange={(e) => onChangeCategory(e)}
+                sx={(theme) => ({ color: theme.palette.primary.main })}
               >
                 {categories.map((cat, i) => (
                   <MenuItem
@@ -114,29 +156,19 @@ const CreatePost = () => {
               variant="outlined"
               placeholder="Add Designer"
               fullWidth
-              sx={(theme) => ({
-                color:
-                  errorInput && designer.length < 1
-                    ? "red"
-                    : theme.palette.primary.main,
-              })}
-              value={designer}
-              onChange={(e) => setDesigner(e.target.value)}
+              sx={(theme) => ({ color: theme.palette.primary.main })}
+              value={designer.input}
+              onChange={(e) => onChangeDesigner(e)}
             />
             <InputBase
               className={classes.inputBody}
               variant="outlined"
               placeholder="Write a review"
               fullWidth
-              sx={(theme) => ({
-                color:
-                  errorInput && body.length < 1
-                    ? "red"
-                    : theme.palette.primary.main,
-              })}
-              value={body}
+              sx={(theme) => ({ color: theme.palette.primary.main })}
+              value={body.input}
               multiline
-              onChange={(e) => setBody(e.target.value)}
+              onChange={(e) => onChangeBody(e)}
             />
             {/* body
             <TextField value={body} onChange={(e) => setBody(e.target.value)} /> */}
@@ -159,11 +191,6 @@ const CreatePost = () => {
                 </option>
               ))}
             </select> */}
-            {errorInput && (
-              <Box className={classes.errorContainer}>
-                <Typography variant="h5">Input fields missing...</Typography>
-              </Box>
-            )}
             <Box className={classes.submitButtonContainer}>
               <Button onClick={submitReview}>Post Review</Button>
             </Box>
