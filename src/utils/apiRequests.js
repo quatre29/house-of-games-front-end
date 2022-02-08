@@ -81,7 +81,6 @@ export const removeReview = async (review_id) => {
 export const postReview = async (reviewBody) => {
   try {
     const review = await api.post(`/api/reviews`, reviewBody);
-    console.log(review);
     return review.data.review;
   } catch (error) {
     console.log(error);

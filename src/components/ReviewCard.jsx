@@ -33,7 +33,6 @@ const ReviewCard = ({ review }) => {
   }, []);
 
   const handleCategoryChip = () => {
-    console.log(review.category);
     navigate(`/categories/${review.category}`, {
       state: { category: { slug: review.category } },
     });
