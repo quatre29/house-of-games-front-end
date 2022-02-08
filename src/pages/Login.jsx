@@ -16,6 +16,7 @@ import {
   ListItemText,
   Paper,
   Grow,
+  CircularProgress,
 } from "@mui/material";
 import { blue, orange, deepOrange, deepPurple } from "@mui/material/colors";
 import { Person as PersonIcon } from "@mui/icons-material";
@@ -75,6 +76,9 @@ const Login = () => {
             />
           </Box>
         </DialogContent>
+        <Box className={classes.loadingContainer}>
+          {loading && <CircularProgress />}
+        </Box>
         <DialogActions>
           <Button autoFocus onClick={submitForm}>
             Login

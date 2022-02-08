@@ -37,7 +37,6 @@ const FilterReviews = ({
   const filterReviews = () => {
     if (!ascending && sortBy.length < 1) return;
 
-    console.log("filtering");
     // setSortBy("");
     // setAscending(false);
     setPage(1);

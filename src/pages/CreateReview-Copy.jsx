@@ -72,7 +72,6 @@ const CreatePost = () => {
       !designer.errorInput &&
       !category.errorInput
     ) {
-      console.log(reviewBody);
       setErrorInput(false);
       // postReview(reviewBody);
     } else {

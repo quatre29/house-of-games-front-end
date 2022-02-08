@@ -17,6 +17,12 @@ const useStyles = makeStyles((theme) => ({
     backdropFilter: "blur(15px)",
     backgroundColor: "rgba(0,0,30,0.4)",
   },
+  loadingContainer: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 }));
 
 export default useStyles;

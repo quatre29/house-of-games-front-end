@@ -49,10 +49,8 @@ const CreatePost = () => {
       designer.length > 0 &&
       category.length > 0
     ) {
-      console.log(reviewBody);
       setErrorInput(false);
       postReview(reviewBody).then((data) => {
-        console.log(data, "8888888888888888");
         navigation(`/reviews/${data.review_id}`);
       });
     } else {
