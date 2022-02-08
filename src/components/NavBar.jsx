@@ -10,6 +10,7 @@ import {
   Container,
   Button,
   Link,
+  Hidden,
 } from "@mui/material";
 import {
   DarkMode,
@@ -51,7 +52,9 @@ const NavBar = () => {
           <IconButton onClick={goBackHome}>
             <HomeRounded fontSize="large" />
           </IconButton>
-          <Typography variant="h6">House of Games</Typography>
+          <Hidden mdDown>
+            <Typography variant="h6">House of Games</Typography>
+          </Hidden>
           <Box sx={{ flexGrow: 1 }} />
           {/* 
           <Box className={classes.searchContainer}>
